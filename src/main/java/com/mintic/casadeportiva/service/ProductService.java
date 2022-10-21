@@ -5,6 +5,7 @@ import com.mintic.casadeportiva.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,7 +61,18 @@ public class ProductService {
         return (List<Product>) productRepository.getByCategory(category);
     }
 
+    public List<String> getAllCategories(){
+        List<String> res = new ArrayList<>();
+        List<Product> allprods = getAll();
+        for(Product prods : allprods){
+            if(!res.contains(prods.getCategoria())){
+                res.add(prods.getCategoria());
+            }
+        }
+        return res;
+    }
+
     public List<Product> productByName(String name){
-        return (List<Product>) productRepository.getByName(name);
+        return (List<Product>) productRepository.getByName(name+"(.*)");
     }
 }

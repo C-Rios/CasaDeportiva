@@ -15,6 +15,6 @@ public interface ProductRepository extends MongoRepository<Product, String> {
     @Query("{Categoria: ?0}")
     public List<Product> getByCategory(String category);
 
-    @Query("{Nombre: ?0}")
+    @Query("{Nombre: {$regex:  ?0}}")
     public List<Product> getByName(String nombre);
 }
